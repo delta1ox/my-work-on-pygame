@@ -1,0 +1,46 @@
+import pygame
+pygame.init()                                 #initializing pygame
+
+win = pygame.display.set_mode((500, 500))     #giving the input as tuple
+pygame.display.set_caption("My first game")   #caption for the window
+
+screenWidth = 500
+
+x = 50                                        #starting position of the character in x direction
+y = 450                                        #starting position of the character in y direction
+height = 15                                   #height of the rectangle
+width = 10                                    #width of the rectangle
+vel = 5                                      #velocity of the character
+
+
+
+run = True                                    #"run" is a variable for the loop
+while run:                                    #this is the main loop for the game
+    pygame.time.delay(100)                    # here im giving a time delay (in ms) to avoid having things go super quick
+    
+    for event in pygame.event.get():          #setting up event, here event is anything that happens from the user 
+        if event.type == pygame.QUIT:         #this is for quiting the game      
+            run = False
+            
+            
+    keys = pygame.key.get_pressed()           # here i set up a list for the arrow keys
+    
+    if keys[pygame.K_LEFT] and x > vel:
+            x -= vel
+    if keys[pygame.K_RIGHT] and x < 500 - width - vel:
+            x += vel
+    if keys[pygame.K_UP] and y > vel:
+            y -= vel
+    if keys[pygame.K_DOWN] and y < 500 - height - vel:
+            y += vel
+   
+            
+    win.fill((0,0,0))                         # here this is used to have no traces behind the movement of the character
+        
+    pygame.draw.rect(win, (255, 0, 0), (x, y, width, height)) # here im drawing a RGB 'rectangle' surface on the 'window' surface
+    pygame.display.update()                                   #TO DIPLAY THE RECTANGLE
+            
+pygame.quit()
+
+
+    
